@@ -32,4 +32,6 @@ public class MainActivity extends Activity
         /*This is an very concise style of code,we can separate it into several part.*/
         startActivity(new Intent(this, NewActivity.class).putExtra(EXTRA_MESSAGE, editText.getText().toString()));
     }
+
+
 }
