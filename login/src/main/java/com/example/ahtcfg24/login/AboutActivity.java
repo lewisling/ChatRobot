@@ -21,7 +21,7 @@ public class AboutActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
 
-        ArrayList<HashMap<String, String>> about_list = new ArrayList<>();//创建一个ArrayList的对象
+        ArrayList<HashMap<String, String>> about_list = new ArrayList<>();
         HashMap<String, String> map1 = new HashMap<>();
         HashMap<String, String> map2 = new HashMap<>();
         HashMap<String, String> map3 = new HashMap<>();
@@ -32,7 +32,7 @@ public class AboutActivity extends ListActivity {
         HashMap<String, String> map8 = new HashMap<>();
         map1.put("title", "开  发  者：");
         map1.put("value", "徐鼎");
-        map2.put("title", "日        期：");//安卓中一个汉字等于四个空格的大小
+        map2.put("title", "日        期：");
         map2.put("value", "2015/3/8");
         map3.put("title", "版        本：");
         map3.put("value", "1.01");

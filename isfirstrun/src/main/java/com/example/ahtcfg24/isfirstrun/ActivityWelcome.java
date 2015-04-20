@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 public class ActivityWelcome extends Activity
 {
+    private long DELAY_MILLS = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -15,11 +18,20 @@ public class ActivityWelcome extends Activity
         setContentView(R.layout.activity_welcome);
         /*The first param is a String key of the file's name.If the file is not exist,it will be created.
         * the second param is a int mode ,it stands for a mode of the file's write-read way.*/
-        SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
 
-        init(mySharedPreferences);
-        /*Destroy the welcome activity*/
-        finish();
+        /*The Handler object is bound to the thread I created.
+         * The postDelayed()'s first param is a Runnable object which will be executed after the message queue.
+         * The second param is the time of period that is delayed.*/
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                init(getSharedPreferences("fileName", MODE_PRIVATE));
+                /*Destroy the welcome activity*/
+                finish();
+            }
+        }, DELAY_MILLS);
     }
 
     /**

@@ -18,7 +18,7 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*匿名内部类访问外部变量，外部变量要用final*/
+        /*When the inner class want to access to the outer variable，the variable need to be added final.*/
         final CheckBox checkBox_show = (CheckBox) findViewById(R.id.show_password);
         final EditText edit_password = (EditText) findViewById(R.id.edit_password);
 
