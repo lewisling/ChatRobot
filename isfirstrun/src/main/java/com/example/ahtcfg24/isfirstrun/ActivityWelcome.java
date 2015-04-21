@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 
 public class ActivityWelcome extends Activity
 {
@@ -15,6 +16,8 @@ public class ActivityWelcome extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        /*Get the Activity fulled on the screen.(It has to be added before setContentView.)*/
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
         /*The first param is a String key of the file's name.If the file is not exist,it will be created.
         * the second param is a int mode ,it stands for a mode of the file's write-read way.*/
