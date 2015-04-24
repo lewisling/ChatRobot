@@ -9,7 +9,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context=".ActivityWelcome">
 
-    <Button
+    <!--<Button
         android:id="@+id/button_goMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,14 +18,14 @@
         android:layout_alignParentEnd="true"
         android:onClick="goMain"
         android:text="@string/button_goMain"/>
-
-    <Button
+-->
+   <!-- <Button
         android:id="@+id/button_goGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:onClick="goGuide"
-        android:text="@string/button_goGuide"/>
+        android:text="@string/button_goGuide"/>-->
 
 </RelativeLayout>

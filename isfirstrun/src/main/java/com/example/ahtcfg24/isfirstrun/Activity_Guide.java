@@ -14,10 +14,10 @@ public class Activity_Guide extends Activity
         setContentView(R.layout.activity_guide);
     }
 
+
     public void goMain(View view)
     {
         startActivity(new Intent(Activity_Guide.this, Activity_Main.class));
         finish();
     }
-
 }

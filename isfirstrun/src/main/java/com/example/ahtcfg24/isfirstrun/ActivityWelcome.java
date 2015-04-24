@@ -40,7 +40,6 @@ public class ActivityWelcome extends Activity
     /**
      * @param view There are a Onclick attribute value in the xml,so it also need a View param.
      *             What's more,public and void are required.
-     */
     public void goMain(View view)
     {
         startActivity(new Intent(this, Activity_Main.class));
@@ -49,7 +48,7 @@ public class ActivityWelcome extends Activity
     public void goGuide(View view)
     {
         startActivity(new Intent(this, Activity_Guide.class));
-    }
+    }*/
 
     /**
      * performing during the stage of initiation.Made a decision about which activity will be started.
