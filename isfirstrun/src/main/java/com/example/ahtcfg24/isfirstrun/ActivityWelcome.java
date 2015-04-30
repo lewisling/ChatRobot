@@ -48,7 +48,7 @@ public class ActivityWelcome extends Activity
         If the isFirstRun's value is not exists,it will be set to true.*/
         if (mySharedPreferences.getBoolean("isFirstRun", true))
         {
-            startActivity(new Intent(this, Activity_Guide.class));
+            startActivity(new Intent(this, ActivityGuide.class));
             /*The edit() method will return a interface object,so we evaluate it to myEditor.*/
             SharedPreferences.Editor myEditor = mySharedPreferences.edit();
             /*Modified the value to false by calling the putBoolean*/
@@ -57,7 +57,7 @@ public class ActivityWelcome extends Activity
             myEditor.apply();
         } else
         {
-            startActivity(new Intent(this, Activity_Main.class));
+            startActivity(new Intent(this, ActivityMain.class));
         }
     }
 }

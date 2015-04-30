@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Activity_Guide extends Activity
+public class ActivityGuide extends Activity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

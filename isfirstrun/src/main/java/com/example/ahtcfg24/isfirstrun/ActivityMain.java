@@ -3,7 +3,7 @@ package com.example.ahtcfg24.isfirstrun;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Activity_Main extends Activity
+public class ActivityMain extends Activity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

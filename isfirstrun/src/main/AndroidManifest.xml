@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_Main"
+            android:name=".ActivityMain"
             android:label="@string/title_activity_activity__main">
         </activity>
         <activity
-            android:name=".Activity_Guide"
+            android:name=".ActivityGuide"
             android:label="@string/title_activity_activity__guide">
         </activity>
     </application>
