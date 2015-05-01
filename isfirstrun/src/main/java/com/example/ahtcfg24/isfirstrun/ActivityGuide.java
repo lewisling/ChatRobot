@@ -35,5 +35,4 @@ public class ActivityGuide extends Activity
         myViewPager.setCurrentItem(0);
     }
 
-
 }

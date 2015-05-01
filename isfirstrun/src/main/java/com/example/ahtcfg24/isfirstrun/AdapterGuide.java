@@ -34,9 +34,7 @@ public class AdapterGuide extends PagerAdapter
     }
 
     /**
-     * Remove a page for the given position.  The adapter is responsible
-     * for removing the view from its container, although it only must ensure
-     * this is done by the time it returns from {@link #finishUpdate(ViewGroup)}.
+     * Remove a page for the given position.
      */
     @Override
     public void destroyItem(ViewGroup container, int position, Object object)
@@ -56,7 +54,7 @@ public class AdapterGuide extends PagerAdapter
 
     /**
      * Determines whether a page View is associated with a specific key object
-     * as returned by {@link #instantiateItem(ViewGroup, int)}. This method is
+     * as returned by instantiateItem(ViewGroup, int). This method is
      * required for a PagerAdapter to function properly.
      */
     @Override
