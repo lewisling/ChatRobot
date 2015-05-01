@@ -16,12 +16,10 @@ import java.util.List;
 public class AdapterGuide extends PagerAdapter
 {
     private List<View> view_list;
-
     public AdapterGuide(List<View> view_list)
     {
         this.view_list = view_list;
     }
-
 
     /**
      * Create the page for the given position.  The adapter is responsible
@@ -32,7 +30,6 @@ public class AdapterGuide extends PagerAdapter
         container.addView(view_list.get(position));
         return view_list.get(position);
     }
-
     /**
      * Remove a page for the given position.
      */
@@ -41,8 +38,6 @@ public class AdapterGuide extends PagerAdapter
     {
         container.removeView(view_list.get(position));
     }
-
-
     /**
      * Return the number of views available.
      */
@@ -51,7 +46,6 @@ public class AdapterGuide extends PagerAdapter
     {
         return view_list.size();
     }
-
     /**
      * Determines whether a page View is associated with a specific key object
      * as returned by instantiateItem(ViewGroup, int). This method is

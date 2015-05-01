@@ -15,7 +15,7 @@ public class ActivityMain extends Activity
     }
 
 
-    public void goGUide(View view)
+    public void goGuide(View view)
     {
         startActivity(new Intent(this, ActivityGuide.class));
     }

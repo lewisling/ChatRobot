@@ -38,7 +38,7 @@ public class ActivityGuide extends Activity
         view_list.add(view3);
         //fill the viewpager
         myViewPager.setAdapter(new AdapterGuide(view_list));
-        //  myViewPager.setCurrentItem(0);
+        // myViewPager.setCurrentItem(0);
 
         //find dots
         LinearLayout dot_layout = (LinearLayout) findViewById(R.id.my_layout);
