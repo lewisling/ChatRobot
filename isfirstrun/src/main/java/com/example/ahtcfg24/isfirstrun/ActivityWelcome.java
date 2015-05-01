@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 public class ActivityWelcome extends Activity
 {
-    private long DELAY_MILLS = 5000;
+    private long DELAY_MILLS = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

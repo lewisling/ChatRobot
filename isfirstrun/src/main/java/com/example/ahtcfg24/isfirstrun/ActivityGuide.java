@@ -15,6 +15,7 @@ import java.util.List;
 public class ActivityGuide extends Activity
 {
     private int currentIndex;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -37,7 +38,7 @@ public class ActivityGuide extends Activity
         view_list.add(view3);
         //fill the viewpager
         myViewPager.setAdapter(new AdapterGuide(view_list));
-      //  myViewPager.setCurrentItem(0);
+        //  myViewPager.setCurrentItem(0);
 
         //find dots
         LinearLayout dot_layout = (LinearLayout) findViewById(R.id.my_layout);
@@ -50,7 +51,8 @@ public class ActivityGuide extends Activity
         //set first dot on highlight
         dots[0].setEnabled(false);
         //set listener
-        myViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        myViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
             {
@@ -75,11 +77,20 @@ public class ActivityGuide extends Activity
 
             }
         });
-
+        view3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(ActivityGuide.this, ActivityMain.class));
+                ActivityGuide.this.finish();
+            }
+        });
     }
 
     public void goMain(View view)
     {
         startActivity(new Intent(ActivityGuide.this, ActivityMain.class));
+        ActivityGuide.this.finish();
     }
 }
