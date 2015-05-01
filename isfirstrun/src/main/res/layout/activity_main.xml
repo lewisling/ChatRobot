@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:text="@string/textView_Main"
-        android:textSize="50sp"/>
+        android:textSize="30sp"/>
 
     <Button
         android:id="@+id/button"

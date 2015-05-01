@@ -7,7 +7,7 @@
     <string name="title_activity_activity__guide">Activity_Guide</string>
     <string name="textView_Guide">这是引导页</string>
     <string name="textView_welcome">这是欢迎页</string>
-    <string name="textView_Main">这是主页</string>
+    <string name="textView_Main">叔叔我们不约！！！！</string>
     <string name="button_goMain">去主页</string>
     <string name="button_goGuide">去引导页</string>
 </resources>
