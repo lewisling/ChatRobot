@@ -1,1 +1,1 @@
-include ':app', ':login', ':startnewactivity', ':isfirstrun'
+include ':app', ':startnewactivity', ':baymax'
