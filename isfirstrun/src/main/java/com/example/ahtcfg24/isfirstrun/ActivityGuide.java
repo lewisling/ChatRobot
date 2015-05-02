@@ -14,33 +14,36 @@ import java.util.List;
 
 public class ActivityGuide extends Activity
 {
+    private List<View> view_list;
     private int currentIndex;
+    private ViewPager myViewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        //find the view of ViewPager
-        ViewPager myViewPager = (ViewPager) findViewById(R.id.guide_viewpager);
+        initPage();
+        initDots();
+    }
 
-        List<View> view_list = new ArrayList<>();
-        //get a LayoutInflater object from default context
-        LayoutInflater inflater = getLayoutInflater();
-
-        //get three page
-        View view1 = inflater.inflate(R.layout.guide_page1, null);
-        View view2 = inflater.inflate(R.layout.guide_page2, null);
-        View view3 = inflater.inflate(R.layout.guide_page3, null);
-        //add the page
-        view_list.add(view1);
-        view_list.add(view2);
-        view_list.add(view3);
-        //fill the viewpager
+    public void initPage()
+    {
+        /*find the view of ViewPager*/
+        myViewPager = (ViewPager) findViewById(R.id.guide_viewpager);
+        /*the list is used to save pages.*/
+        view_list = new ArrayList<>();
+        /*initial the page resource*/
+        int[] resource = {R.layout.guide_page1, R.layout.guide_page2, R.layout.guide_page3};
+        /*inflate the pages into the list.*/
+        inflatePage(resource);
+        /*fill the viewpager*/
         myViewPager.setAdapter(new AdapterGuide(view_list));
-        // myViewPager.setCurrentItem(0);
+    }
 
-        //find dots
+    public void initDots()
+    {
+        /*find dots*/
         LinearLayout dot_layout = (LinearLayout) findViewById(R.id.my_layout);
         final ImageView[] dots = new ImageView[3];
         for (int i = 0; i < 3; i++)
@@ -53,12 +56,6 @@ public class ActivityGuide extends Activity
         //set listener
         myViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-
-            }
-
             /**
              * called when the new page is selected.
              * @param position the number of new page
@@ -72,20 +69,27 @@ public class ActivityGuide extends Activity
             }
 
             @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+
+            }
+
+            @Override
             public void onPageScrollStateChanged(int state)
             {
 
             }
         });
-        view3.setOnClickListener(new View.OnClickListener()
+    }
+
+    public void inflatePage(int[] resource)
+    {
+        /*get a LayoutInflater object from default context*/
+        LayoutInflater inflater = getLayoutInflater();
+        for (int aResource : resource)
         {
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(ActivityGuide.this, ActivityMain.class));
-                ActivityGuide.this.finish();
-            }
-        });
+            view_list.add(inflater.inflate(aResource, null));
+        }
     }
 
     public void goMain(View view)
