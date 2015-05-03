@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.ahtcfg24.baymax.adapter.AdapterGuide;
+
 import java.util.ArrayList;
 import java.util.List;
 

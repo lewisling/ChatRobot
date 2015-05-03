@@ -100,6 +100,7 @@
         android:layout_height="20dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
+        android:onClick="goAbout"
         android:text="关于我们"
         android:textColor="#242529"
         android:textSize="7pt"/>
