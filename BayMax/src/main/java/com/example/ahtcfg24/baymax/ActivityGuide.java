@@ -96,7 +96,7 @@ public class ActivityGuide extends Activity
 
     public void goMain(View view)
     {
-        startActivity(new Intent(ActivityGuide.this, ActivityMain.class));
+        startActivity(new Intent(ActivityGuide.this, ActivityLogin.class));
         ActivityGuide.this.finish();
     }
 }

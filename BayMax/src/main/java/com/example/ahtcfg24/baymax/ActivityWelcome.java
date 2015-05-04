@@ -18,8 +18,7 @@ public class ActivityWelcome extends Activity
         /*Get the Activity fulled on the screen.(It has to be added before setContentView.)*/
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
-        /*The first param is a String key of the file's name.If the file is not exist,it will be created.
-        * the second param is a int mode ,it stands for a mode of the file's write-read way.*/
+
 
         /*The Handler object is bound to the thread I created.
          * The postDelayed()'s first param is a Runnable object which will be executed after the message queue.
@@ -29,6 +28,8 @@ public class ActivityWelcome extends Activity
             @Override
             public void run()
             {
+                 /*The first param is a String key of the file's name.If the file is not exist,it will be created.
+                  * the second param is a int mode ,it stands for a mode of the file's write-read way.*/
                 init(getSharedPreferences("fileName", MODE_PRIVATE));
                 /*Destroy the welcome activity*/
                 finish();
@@ -57,7 +58,7 @@ public class ActivityWelcome extends Activity
             myEditor.apply();
         } else
         {
-            startActivity(new Intent(this, ActivityMain.class));
+            startActivity(new Intent(this, ActivityLogin.class));
         }
     }
 }
