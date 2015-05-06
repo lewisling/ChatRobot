@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">StartNewActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="button_send">send message</string>
-    <string name="editText_hint">Input a message and click the button</string>
-</resources>

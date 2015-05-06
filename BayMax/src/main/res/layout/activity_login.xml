@@ -19,7 +19,7 @@
         android:src="@drawable/baymax"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edit_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -35,9 +35,9 @@
         android:id="@+id/edit_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/editText"
-        android:layout_alignStart="@id/editText"
-        android:layout_below="@id/editText"
+        android:layout_alignEnd="@id/edit_username"
+        android:layout_alignStart="@id/edit_username"
+        android:layout_below="@id/edit_username"
         android:layout_centerVertical="true"
         android:layout_marginTop="5dp"
         android:ems="10"
@@ -66,7 +66,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/show_password"
         android:layout_alignEnd="@+id/edit_password"
-
         android:background="@drawable/button"
         android:onClick="goMain"
         android:text="登录"

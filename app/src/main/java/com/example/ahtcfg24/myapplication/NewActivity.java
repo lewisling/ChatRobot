@@ -1,4 +1,4 @@
-package com.example.ahtcfg24.startnewactivity;
+package com.example.ahtcfg24.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;

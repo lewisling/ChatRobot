@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LearningPractice.iml" filepath="$PROJECT_DIR$/LearningPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BayMax.iml" filepath="$PROJECT_DIR$/BayMax.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baymax/baymax.iml" filepath="$PROJECT_DIR$/baymax/baymax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/startnewactivity/startnewactivity.iml" filepath="$PROJECT_DIR$/startnewactivity/startnewactivity.iml" />
     </modules>
   </component>
 </project>
