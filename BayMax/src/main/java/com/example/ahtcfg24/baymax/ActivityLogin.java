@@ -21,8 +21,8 @@ import android.widget.EditText;
 
 public class ActivityLogin extends Activity
 {
-    SharedPreferences.Editor user_editor;
     private EditText edit_username;
+    private EditText edit_password;
     private SharedPreferences userPreference;
 
     @Override
@@ -30,15 +30,16 @@ public class ActivityLogin extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        edit_username = (EditText) findViewById(R.id.edit_username);
-        userPreference = getSharedPreferences("user", MODE_PRIVATE);
 
-        readUserPreference();
+
         final CheckBox checkBox_show = (CheckBox) findViewById(R.id.show_password);
-        final EditText edit_password = (EditText) findViewById(R.id.edit_password);
+        final EditText editText_password = (EditText) findViewById(R.id.edit_password);
 
-        edit_username.setText(userPreference.getString("edit_username", null));
-        edit_password.setText(userPreference.getString("password", null));
+        edit_username = (EditText) findViewById(R.id.edit_username);
+        edit_password = editText_password;
+
+        readUserPreference(edit_username, edit_password);
+
         checkBox_show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
@@ -46,10 +47,10 @@ public class ActivityLogin extends Activity
             {
                 if (checkBox_show.isChecked())
                 {
-                    edit_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    editText_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else
                 {
-                    edit_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    editText_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
@@ -67,20 +68,22 @@ public class ActivityLogin extends Activity
     {
         startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
         saveUserPreference();
-
     }
 
     public void saveUserPreference()
     {
-        user_editor = userPreference.edit();
-        EditText password = (EditText) findViewById(R.id.edit_password);
-        user_editor.putString("edit_username", edit_username.getText().toString());
-        user_editor.putString("password", password.getText().toString());
+        SharedPreferences.Editor user_editor = userPreference.edit();
+        user_editor.putString("local_username", edit_username.getText().toString());
+        user_editor.putString("local_password", edit_password.getText().toString());
         user_editor.apply();
     }
 
-    public void readUserPreference()
+    public void readUserPreference(EditText edit_username, EditText edit_password)
     {
-
+        userPreference = getSharedPreferences("user", MODE_PRIVATE);
+        String username = userPreference.getString("local_username", null);
+        String password = userPreference.getString("local_password", null);
+        edit_username.setText(username);
+        edit_password.setText(password);
     }
 }
