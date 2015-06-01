@@ -1,1 +1,1 @@
-include ':app', ':baymax', ':myapplication'
+include ':app', 'baymax'
