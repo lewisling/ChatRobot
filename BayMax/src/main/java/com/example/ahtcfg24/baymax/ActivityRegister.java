@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.EditText;
+//import android.widget.TextView;
+//import android.widget.Toast;
 
 
 public class ActivityRegister extends Activity
@@ -19,17 +19,16 @@ public class ActivityRegister extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        EditText username = (EditText) findViewById(R.id.rg_username);
-        EditText password = (EditText) findViewById(R.id.rg_password);
-        EditText password2 = (EditText) findViewById(R.id.rg_password2);
-        EditText email = (EditText) findViewById(R.id.rg_email);
-        EditText phone = (EditText) findViewById(R.id.rg_phone);
+//        EditText username = (EditText) findViewById(R.id.rg_username);
+//        EditText password = (EditText) findViewById(R.id.rg_password);
+//        EditText password2 = (EditText) findViewById(R.id.rg_password2);
+//        EditText email = (EditText) findViewById(R.id.rg_email);
+//        EditText phone = (EditText) findViewById(R.id.rg_phone);
     }
 
 
     public void ensure(View view)
     {
-
         startActivity(new Intent(ActivityRegister.this, ActivityMain.class));
     }
 
@@ -38,16 +37,16 @@ public class ActivityRegister extends Activity
 //        boolean flag = false;
 //        if (!num.matches("[0-9]{10}"))
 //        {
-//            Toast("Ñ§ºÅÎª10Î»Êı×Ö£¡");
+//            Toast("å­¦å·ä¸º10ä½æ•°å­—ï¼");
 //        } else if (!name.matches("[\\u4E00-\\u9FA5]{2,4}"))
 //        {
-//            MyDialog.show("ÇëÌîĞ´ÕıÈ·µÄĞÕÃû£¡");
+//            MyDialog.show("è¯·å¡«å†™æ­£ç¡®çš„å§“åï¼");
 //        } else if (!location.matches("[\\u4E00-\\u9FA5]{2,5}"))
 //        {
-//            MyDialog.show("ÇëÌîĞ´ÕıÈ·µÄ¼®¹á£¡");
+//            MyDialog.show("è¯·å¡«å†™æ­£ç¡®çš„ç±è´¯ï¼");
 //        } else if (!birth.matches("[1][9][0-9]{2}[/.]([0][1-9]|[1][0-2])[/.]([0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])"))
 //        {
-//            MyDialog.show("ÇëÌîĞ´ÕıÈ·µÄ³öÉúÄêÔÂ£¡Èç1996.01.01");
+//            MyDialog.show("è¯·å¡«å†™æ­£ç¡®çš„å‡ºç”Ÿå¹´æœˆï¼å¦‚1996.01.01");
 //        } else flag = true;
 //
 //        return flag;
