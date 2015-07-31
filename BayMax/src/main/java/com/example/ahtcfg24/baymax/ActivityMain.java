@@ -1,6 +1,7 @@
 package com.example.ahtcfg24.baymax;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
@@ -65,32 +66,25 @@ public class ActivityMain extends Activity {
         SubActionButton button1 = itemBuilder.setContentView(item1).build();
         //选项2
         ImageView item2 = new ImageView(this);
-        item2.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_radio_to_on_mtrl_000));
+        item2.setImageDrawable(getResources().getDrawable(R.drawable.abc_ic_go_search_api_mtrl_alpha));
         SubActionButton button2 = itemBuilder.setContentView(item2).build();
         //选项3
         ImageView item3 = new ImageView(this);
-        item3.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_radio_to_on_mtrl_000));
+        item3.setImageDrawable(getResources().getDrawable(R.drawable.abc_ic_voice_search_api_mtrl_alpha));
         SubActionButton button3 = itemBuilder.setContentView(item3).build();
-        //选项4
-        ImageView item4 = new ImageView(this);
-        item4.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_radio_to_on_mtrl_000));
-        SubActionButton button4 = itemBuilder.setContentView(item4).build();
-        //选项5
-        ImageView item5 = new ImageView(this);
-        item5.setImageDrawable(getResources().getDrawable(R.drawable.abc_btn_radio_to_on_mtrl_000));
-        SubActionButton button5 = itemBuilder.setContentView(item5).build();
+
 
         //创建菜单
         FloatingActionMenu floatMenu = new FloatingActionMenu.Builder(this)
                 .addSubActionView(button1)
                 .addSubActionView(button2)
                 .addSubActionView(button3)
-                .addSubActionView(button4)
-                .addSubActionView(button5)
                 .setStartAngle(180)
                 .setEndAngle(90)
-                .setRadius((int)(screenWidth*0.33))
+                .setRadius((int) (screenWidth * 0.33))
                 .attachTo(floatButton)
                 .build();
     }
+
+
 }
