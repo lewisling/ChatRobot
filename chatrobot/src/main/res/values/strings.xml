@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ChatRobot</string>
-    <string name="title_activity_demo">DemoActivity</string>
+    <string name="title_activity_main">超级机器人</string>
 </resources>

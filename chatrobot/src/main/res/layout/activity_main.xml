@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:background="#69c9f5"
             android:gravity="center_vertical"
-            android:text="你好"
+            android:text="你好啊"
             android:textSize="50sp" />
 
     </LinearLayout>
@@ -44,7 +44,7 @@
             android:layout_marginTop="5dp"
             android:layout_weight="11"
             android:background="#fce6e6"
-            android:hint="你想说点啥？" />
+            android:hint="说点啥吧？" />
 
         <Button
             android:id="@+id/send_button"
