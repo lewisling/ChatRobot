@@ -1,10 +1,16 @@
 package cn.iamding.chatrobot.activities;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,21 +30,35 @@ import com.turing.androidsdk.voice.VoiceRecognizeManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.iamding.chatrobot.R;
-import cn.iamding.chatrobot.globals.MyVariable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends Activity {
+import cn.iamding.chatrobot.R;
+import cn.iamding.chatrobot.adapters.ChatListAdapter;
+import cn.iamding.chatrobot.globals.MyVariable;
+import cn.iamding.chatrobot.model.OneMessage;
+import cn.iamding.chatrobot.ui.MyProgressDialog;
+
+public class MainActivity extends AppCompatActivity {
+    private MyProgressDialog myProgressDialog;
+    private List<OneMessage> messageList;
     private ListView chatList;
     private Button sendButton;
     private ImageButton voiceButton;
     private EditText inputEdit;
     private VoiceRecognizeManager voiceRecognizeManager;
     private TTSManager ttsManager;
+
+    private ChatListAdapter chatListAdapter;
     private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     ttsManager.startTTS((String) msg.obj, Constant.XunFei);
+                    messageList.add(new OneMessage(OneMessage.From.NET, (String) msg.obj));
+                    chatListAdapter.notifyDataSetChanged();
+                    chatList.setSelection(messageList.size() - 1);
+
                     break;
                 default:
                     break;
@@ -53,12 +73,45 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle("博博的小妾");
+        setSupportActionBar(toolbar);
 
+        initView();
         initMscAndTTS();
         initTuringApiManager();
 
-        ttsManager.startTTS("你好啊", Constant.XunFei);//开始把文本合成语音
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected void onPostExecute(String s) {
+                ttsManager.startTTS(s, Constant.XunFei);//开始把文本合成语音
+                messageList.add(new OneMessage(OneMessage.From.NET, s));
+                chatListAdapter = new ChatListAdapter(MainActivity.this, messageList);
+                chatList.setAdapter(chatListAdapter);
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                return isFirstRun();
+            }
+        }.execute();
+
+    }
+
+    private String isFirstRun() {
+        String firstWord;
+        SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
+        if (mySharedPreferences.getBoolean("isFirstRun", true)) {
+            firstWord = "生日快乐，张博";
+            SharedPreferences.Editor myEditor = mySharedPreferences.edit();
+            myEditor.putBoolean("isFirstRun", false);
+            myEditor.apply();
+        } else {
+            firstWord = "你好啊";
+        }
+        return firstWord;
+
     }
 
     /**
@@ -69,6 +122,8 @@ public class MainActivity extends Activity {
         inputEdit = (EditText) findViewById(R.id.input_edit);
         sendButton = (Button) findViewById(R.id.send_button);
         voiceButton = (ImageButton) findViewById(R.id.voice_button);
+        messageList = new ArrayList<>();
+
     }
 
 
@@ -107,7 +162,7 @@ public class MainActivity extends Activity {
         mTuringApiManager = new TuringApiManager(turingApiConfig, new HttpRequestWatcher() {//根据配置请求网络数据并解析获得的数据
 
             /**
-             * 获取数据成功后解析出其中的text信息
+             * 从图灵服务获取机器人的回复
              *
              * @param arg0 从服务器获取到的数据
              */
@@ -117,7 +172,7 @@ public class MainActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(arg0);
                     if (jsonObject.has("text")) {
                         handler.obtainMessage(1, jsonObject.get("text"))
-                               .sendToTarget();//用handler获取解析出来的text
+                               .sendToTarget();//用handler获取解析出来的text，标记为1,发送到target(target==this)
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -144,7 +199,18 @@ public class MainActivity extends Activity {
      * @param view sendButton
      */
     public void sendMessage(View view) {
-        // TODO: 2015/12/13
+        String inputInfo = inputEdit.getText().toString();
+        inputEdit.setText("");
+        mTuringApiManager.requestTuringAPI(inputInfo);
+        messageList.add(new OneMessage(OneMessage.From.LOCAL, inputInfo));
+        chatListAdapter.notifyDataSetChanged();
+        chatList.setSelection(messageList.size() - 1);
+
+        // 切换软键盘状态
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 
     /**
@@ -153,7 +219,8 @@ public class MainActivity extends Activity {
      * @param view voiceButton
      */
     public void sendVoice(View view) {
-        // TODO: 2015/12/13
+        voiceRecognizeManager.startRecognize(Constant.XunFei);//开始识别用户录音
+        myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
     }
 
 
@@ -176,7 +243,6 @@ public class MainActivity extends Activity {
         @Override
         public void onSpeechFinish() {
             Log.i("MyTTSListener", "TTS完成");
-            voiceRecognizeManager.startRecognize(Constant.XunFei);//开始识别用户录音
         }
 
         /**
@@ -239,6 +305,8 @@ public class MainActivity extends Activity {
         @Override
         public void onRecordEnd() {
             Log.i("VoiceRecognizeListener", "语音输入完毕");
+            myProgressDialog.dismiss();
+
         }
 
         /**
@@ -249,7 +317,10 @@ public class MainActivity extends Activity {
         @Override
         public void onRecognizeResult(String arg0) {
             Log.i("VoiceRecognizeListener", "识别结果为：" + arg0);
-            mTuringApiManager.requestTuringAPI(arg0);// 识别到话语后，将其发向图灵服务器，进行语义分析
+            mTuringApiManager.requestTuringAPI(arg0);// 识别到话语后，将其发向图灵服务器
+            messageList.add(new OneMessage(OneMessage.From.LOCAL, arg0));
+            chatListAdapter.notifyDataSetChanged();
+            chatList.setSelection(messageList.size() - 1);
         }
 
         /**
@@ -260,6 +331,8 @@ public class MainActivity extends Activity {
         @Override
         public void onRecognizeError(String arg0) {
             Log.i("VoiceRecognizeListener", "语音识别出错：" + arg0);
+            myProgressDialog.dismiss();
+            Toast.makeText(getApplicationContext(), arg0, Toast.LENGTH_SHORT).show();
         }
 
         /**
