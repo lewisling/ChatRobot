@@ -6,4 +6,5 @@ package cn.iamding.chatrobot.globals;
  */
 public class MyVariable {
     public static final String TULING_APIKEY = "c8ded35d005d142d84e4efb641b48b9c";//图灵apikey
+
 }
