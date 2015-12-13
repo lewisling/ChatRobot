@@ -48,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputEdit;
     private VoiceRecognizeManager voiceRecognizeManager;
     private TTSManager ttsManager;
-
     private ChatListAdapter chatListAdapter;
+    private TuringApiManager mTuringApiManager;
+    private MyTTSListener myTTSListener;
+    private MyVoiceRecognizeListener myVoiceRecognizeListener;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -65,16 +67,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private TuringApiManager mTuringApiManager;
-    private MyTTSListener myTTSListener;
-    private MyVoiceRecognizeListener myVoiceRecognizeListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setTitle("博博的小妾");
         setSupportActionBar(toolbar);
 
         initView();
@@ -83,34 +82,18 @@ public class MainActivity extends AppCompatActivity {
 
         new AsyncTask<Void, Void, String>() {
             @Override
+            protected String doInBackground(Void... voids) {
+                return isFirstRun();
+            }
+
+            @Override
             protected void onPostExecute(String s) {
                 ttsManager.startTTS(s, Constant.BaiDu);//开始把文本合成语音
                 messageList.add(new OneMessage(OneMessage.From.NET, s));
                 chatListAdapter = new ChatListAdapter(MainActivity.this, messageList);
                 chatList.setAdapter(chatListAdapter);
             }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-
-                return isFirstRun();
-            }
         }.execute();
-
-    }
-
-    private String isFirstRun() {
-        String firstWord;
-        SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
-        if (mySharedPreferences.getBoolean("isFirstRun", true)) {
-            firstWord = "生日快乐，张博";
-            SharedPreferences.Editor myEditor = mySharedPreferences.edit();
-            myEditor.putBoolean("isFirstRun", false);
-            myEditor.apply();
-        } else {
-            firstWord = "你好啊";
-        }
-        return firstWord;
 
     }
 
@@ -159,42 +142,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        mTuringApiManager = new TuringApiManager(turingApiConfig, new HttpRequestWatcher() {//根据配置请求网络数据并解析获得的数据
-
-            /**
-             * 从图灵服务获取机器人的回复
-             *
-             * @param arg0 从服务器获取到的数据
-             */
-            @Override
-            public void onSuceess(String arg0) {
-                try {
-                    JSONObject jsonObject = new JSONObject(arg0);
-                    if (jsonObject.has("text")) {
-                        handler.obtainMessage(1, jsonObject.get("text"))
-                               .sendToTarget();//用handler获取解析出来的text，标记为1,发送到target(target==this)
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            /**
-             * 获取数据失败时调用
-             *
-             * @param arg0 失败时得到的信息
-             */
-            @Override
-            public void onError(String arg0) {
-                Log.e("onError arg0", arg0);
-                Toast.makeText(getApplicationContext(), "获取数据失败，信息：" + arg0, Toast.LENGTH_SHORT)
-                     .show();
-            }
-        });
+        mTuringApiManager = new TuringApiManager(turingApiConfig, new MyHttpRequestWatcher());
     }
 
     /**
-     * 发送文字消息
+     * 检测是不是第一次运行
+     *
+     * @return 第一句要说的话
+     */
+    private String isFirstRun() {
+        String firstWord;
+        SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
+        if (mySharedPreferences.getBoolean("isFirstRun", true)) {
+            firstWord = "我是世界上最美的小妾，臭美就一次";
+            SharedPreferences.Editor myEditor = mySharedPreferences.edit();
+            myEditor.putBoolean("isFirstRun", false);
+            myEditor.apply();
+        } else {
+            firstWord = "你好呀";
+        }
+        return firstWord;
+
+    }
+
+
+    /**
+     * 点击sendButton发送文字消息
      *
      * @param view sendButton
      */
@@ -214,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 发送语音
+     * 点击语音按钮开始录音
      *
      * @param view voiceButton
      */
@@ -345,5 +318,40 @@ public class MainActivity extends AppCompatActivity {
             Log.i("VoiceRecognizeListener", "音量改变：" + arg0);
         }
 
+    }
+
+    /**
+     * 图灵API服务器请求结果监听器
+     */
+    private class MyHttpRequestWatcher implements HttpRequestWatcher {//根据配置请求网络数据并解析获得的数据
+
+        /**
+         * 从图灵服务获取机器人的回复
+         *
+         * @param arg0 从服务器获取到的数据
+         */
+        @Override
+        public void onSuceess(String arg0) {
+            try {
+                JSONObject jsonObject = new JSONObject(arg0);
+                if (jsonObject.has("text")) {
+                    handler.obtainMessage(1, jsonObject.get("text"))
+                           .sendToTarget();//用handler获取解析出来的text，标记为1,发送到target(target==this)
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * 获取数据失败时调用
+         *
+         * @param arg0 失败时得到的信息
+         */
+        @Override
+        public void onError(String arg0) {
+            Log.e("onError arg0", arg0);
+            Toast.makeText(getApplicationContext(), "获取数据失败，信息：" + arg0, Toast.LENGTH_SHORT).show();
+        }
     }
 }
