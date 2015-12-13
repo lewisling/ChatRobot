@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    ttsManager.startTTS((String) msg.obj, Constant.XunFei);
+                    ttsManager.startTTS((String) msg.obj, Constant.BaiDu);
                     messageList.add(new OneMessage(OneMessage.From.NET, (String) msg.obj));
                     chatListAdapter.notifyDataSetChanged();
                     chatList.setSelection(messageList.size() - 1);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected void onPostExecute(String s) {
-                ttsManager.startTTS(s, Constant.XunFei);//开始把文本合成语音
+                ttsManager.startTTS(s, Constant.BaiDu);//开始把文本合成语音
                 messageList.add(new OneMessage(OneMessage.From.NET, s));
                 chatListAdapter = new ChatListAdapter(MainActivity.this, messageList);
                 chatList.setAdapter(chatListAdapter);
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view voiceButton
      */
     public void sendVoice(View view) {
-        voiceRecognizeManager.startRecognize(Constant.XunFei);//开始识别用户录音
+        voiceRecognizeManager.startRecognize(Constant.BaiDu);//开始识别用户录音
         myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
     }
 
