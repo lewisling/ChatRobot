@@ -16,7 +16,8 @@
             android:id="@+id/my_image"
             android:layout_width="49dp"
             android:layout_height="49dp"
-            android:src="@drawable/my"/>
+            android:src="@drawable/my_icon"
+            />
 
         <TextView
             android:id="@+id/my_name"

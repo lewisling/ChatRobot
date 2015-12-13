@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/record_button"></item>
-    <item android:drawable="@drawable/recording_button" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/voice_unpressd" android:state_focused="true"></item>
+    <item android:drawable="@drawable/voice_pressed" android:state_pressed="true"></item>
+
+    <item android:drawable="@drawable/voice_unpressd"></item>
 
 </selector>
