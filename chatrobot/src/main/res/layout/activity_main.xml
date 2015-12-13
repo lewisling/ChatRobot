@@ -1,56 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp"
-    tools:context=".Activities.MainActivity">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chat_background"
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher" />
+    <RelativeLayout
+        android:id="@+id/chat_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#f1ebeb">
 
         <TextView
-            android:id="@+id/chat_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#69c9f5"
-            android:gravity="center_vertical"
-            android:text="你好啊"
-            android:textSize="50sp" />
-
-    </LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="小妾"
+            android:textColor="#33b5e5"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/chat_bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#fff"
         android:orientation="horizontal">
 
+
         <EditText
-            android:id="@+id/input_edittext"
+            android:id="@+id/input_edit"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="11"
-            android:background="#fce6e6"
-            android:hint="说点啥吧？" />
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_edit_normal"
+            android:singleLine="true"
+            android:textSize="18sp"/>
+
+
+        <ImageButton
+            android:id="@+id/voice_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/send_button"
+            android:onClick="sendVoice"
+            android:src="@drawable/voice_button"
+            />
 
         <Button
             android:id="@+id/send_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="发送" />
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/send_button"
+            android:onClick="sendMessage"
+            android:text="发送"
+            android:textColor="#fff"/>
+
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_bottom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/chat_title"
+        android:cacheColorHint="#0000"
+        android:divider="@null"
+        android:dividerHeight="5dp"
+        android:scrollbarStyle="outsideOverlay">
+    </ListView>
+
+
 </RelativeLayout>

@@ -1,17 +1,14 @@
-package cn.iamding.chatrobot.Activities;
+package cn.iamding.chatrobot.activities;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.turing.androidsdk.HttpRequestWatcher;
@@ -27,24 +24,17 @@ import com.turing.androidsdk.voice.VoiceRecognizeManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import cn.iamding.chatrobot.R;
-import cn.iamding.chatrobot.globals.MyURL;
 import cn.iamding.chatrobot.globals.MyVariable;
 
-import static cn.iamding.chatrobot.netutils.URLNetUtil.getByURLConnection;
-import static cn.iamding.chatrobot.netutils.URLNetUtil.regexOutput;
-
 public class MainActivity extends Activity {
-    private EditText inputEditText;
+    private ListView chatList;
     private Button sendButton;
-    private TextView chatTextView;
+    private ImageButton voiceButton;
+    private EditText inputEdit;
     private VoiceRecognizeManager voiceRecognizeManager;
     private TTSManager ttsManager;
-    Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
@@ -64,32 +54,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String inputData = inputEditText.getText().toString();
-                inputEditText.setText("");
-                String httpArg = null;
-                //URL中编码会变，因此要处理
-                try {
-                    httpArg = "key=" + MyVariable.TULING_APIKEY + "&info=" + URLEncoder.encode(inputData, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                String httpURL = MyURL.TULING + "?" + httpArg;
-                //访问网络前需要先对网络是否可用进行检验，用到权限查看network
-                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    new MyAysTask().execute(httpURL);
-                } else {
-                    Toast.makeText(getApplicationContext(), "网络连接失败，请检查网络连接后重试", Toast.LENGTH_SHORT)
-                         .show();
-                }
-
-                //不能在主线程中使用网络相关的功能
-            }
-        });
 
         initMscAndTTS();
         initTuringApiManager();
@@ -97,11 +61,16 @@ public class MainActivity extends Activity {
         ttsManager.startTTS("你好啊", Constant.XunFei);//开始把文本合成语音
     }
 
+    /**
+     * 初始化布局控件
+     */
     private void initView() {
-        inputEditText = (EditText) findViewById(R.id.input_edittext);
+        chatList = (ListView) findViewById(R.id.chat_list);
+        inputEdit = (EditText) findViewById(R.id.input_edit);
         sendButton = (Button) findViewById(R.id.send_button);
-        chatTextView = (TextView) findViewById(R.id.chat_textview);
+        voiceButton = (ImageButton) findViewById(R.id.voice_button);
     }
+
 
     /**
      * 初始化语音识别和TTS
@@ -124,7 +93,7 @@ public class MainActivity extends Activity {
              */
             @Override
             public void onComplete() {
-
+                Log.i("userid", "userid生成成功");
             }
 
             /**
@@ -169,22 +138,24 @@ public class MainActivity extends Activity {
         });
     }
 
-    private class MyAysTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String[] urls) {
-            try {
-                return getByURLConnection(urls[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "无法访问该URL";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            chatTextView.setText(regexOutput(result));
-        }
+    /**
+     * 发送文字消息
+     *
+     * @param view sendButton
+     */
+    public void sendMessage(View view) {
+        // TODO: 2015/12/13
     }
+
+    /**
+     * 发送语音
+     *
+     * @param view voiceButton
+     */
+    public void sendVoice(View view) {
+        // TODO: 2015/12/13
+    }
+
 
     /**
      * TTS机器语音合成监听器，用于监听机器说话的状态
@@ -293,11 +264,12 @@ public class MainActivity extends Activity {
 
         /**
          * 用户说话的音量发生了改变（仅对讯飞有效）
+         *
          * @param arg0 音量
          */
         @Override
         public void onVolumeChange(int arg0) {
-            Log.i("VoiceRecognizeListener", "音量改变："+arg0);
+            Log.i("VoiceRecognizeListener", "音量改变：" + arg0);
         }
 
     }
