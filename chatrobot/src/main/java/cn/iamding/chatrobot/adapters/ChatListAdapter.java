@@ -74,7 +74,7 @@ public class ChatListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.speech.setText(msg.getText());
+        viewHolder.speech.setText(msg.getContent());
         return convertView;
     }
 

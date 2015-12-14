@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -43,7 +44,6 @@ import cn.iamding.chatrobot.model.OneMessage;
 import cn.iamding.chatrobot.ui.MyProgressDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private android.app.ActionBar actionBar;
     private MyProgressDialog myProgressDialog;
     private List<OneMessage> messageList;
     private ListView chatList;
@@ -64,8 +64,15 @@ public class MainActivity extends AppCompatActivity {
                     messageList.add(new OneMessage(OneMessage.From.NET, (String) msg.obj));
                     chatListAdapter.notifyDataSetChanged();
                     chatList.setSelection(messageList.size() - 1);
-
                     break;
+                case 2:
+                    messageList.add(new OneMessage(OneMessage.From.NET, (String) msg.obj,2));
+                    chatListAdapter.notifyDataSetChanged();
+                    chatList.setSelection(messageList.size() - 1);
+                case 3:
+                    messageList.add(new OneMessage(OneMessage.From.NET, (String) msg.obj,3));
+                    chatListAdapter.notifyDataSetChanged();
+                    chatList.setSelection(messageList.size() - 1);
                 default:
                     break;
             }
@@ -84,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 定义ActionBar选项被选之后的动作
-     * @param item
-     * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -134,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
         sendButton = (Button) findViewById(R.id.send_button);
         voiceButton = (ImageButton) findViewById(R.id.voice_button);
         messageList = new ArrayList<>();
+        chatList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO: 15-12-14 长按消息监听
+                return false;
+            }
+        });
 
     }
 
@@ -214,8 +226,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view voiceButton
      */
     public void sendVoice(View view) {
-            voiceRecognizeManager.startRecognize(Constant.BaiDu);//开始识别用户录音
-            myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
+        voiceRecognizeManager.startRecognize(Constant.BaiDu);//开始识别用户录音
+        myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
     }
 
 
@@ -359,6 +371,11 @@ public class MainActivity extends AppCompatActivity {
                 if (jsonObject.has("text")) {
                     handler.obtainMessage(1, jsonObject.get("text"))
                            .sendToTarget();//用handler获取解析出来的text，标记为1,发送到target(target==this)
+                }
+                if (jsonObject.has("url")) {
+                    handler.obtainMessage(2, jsonObject.get("url")).sendToTarget();
+                }if (jsonObject.has("list")){
+                    handler.obtainMessage(3,jsonObject.get("list")).sendToTarget();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

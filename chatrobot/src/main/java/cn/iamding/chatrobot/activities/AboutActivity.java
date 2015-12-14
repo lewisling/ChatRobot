@@ -2,7 +2,6 @@ package cn.iamding.chatrobot.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,8 +24,15 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         init();
+        checkUpdate();
+    }
+
+    /**
+     * 检查更新
+     */
+    private void checkUpdate() {
+        // TODO: 15-12-14 检查更新
     }
 
     /**
