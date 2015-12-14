@@ -1,14 +1,17 @@
 package cn.iamding.chatrobot.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -68,13 +71,36 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 自定义ActionBar
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * 定义ActionBar选项被选之后的动作
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_option_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         initView();
         initMscAndTTS();
@@ -126,17 +152,11 @@ public class MainActivity extends AppCompatActivity {
     private void initTuringApiManager() {
         TuringApiConfig turingApiConfig = new TuringApiConfig(this, MyVariable.TULING_APIKEY);
         turingApiConfig.init(this, new InitListener() {//初始化配置信息，并生成userid
-            /**
-             * 生成userid成功时调用
-             */
             @Override
             public void onComplete() {
                 Log.i("userid", "userid生成成功");
             }
 
-            /**
-             * 生成userid失败时调用
-             */
             @Override
             public void onFail() {
 

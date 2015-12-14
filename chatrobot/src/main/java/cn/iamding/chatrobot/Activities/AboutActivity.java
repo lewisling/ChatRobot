@@ -1,4 +1,4 @@
-package com.example.ahtcfg24.baymax;
+package cn.iamding.chatrobot.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,16 +11,15 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cn.iamding.chatrobot.R;
 
-/**
- * 关于
- */
-public class ActivityAbout extends ListActivity {
+public class AboutActivity extends ListActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        getActionBar();
         ArrayList<HashMap<String, String>> about_list = new ArrayList<>();
         HashMap<String, String> map1 = new HashMap<>();
         HashMap<String, String> map2 = new HashMap<>();
@@ -47,8 +46,7 @@ public class ActivityAbout extends ListActivity {
         about_list.add(map5);
         about_list.add(map6);
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, about_list, R.layout.about_list, new String[]{
-                "title",
-                "value"
+                "title", "value"
         }, new int[]{R.id.list_title, R.id.list_value});
         setListAdapter(simpleAdapter);
 
@@ -77,5 +75,5 @@ public class ActivityAbout extends ListActivity {
         ToWeb = Intent.createChooser(ToWeb, null);
         startActivity(ToWeb);
     }
-}
 
+}

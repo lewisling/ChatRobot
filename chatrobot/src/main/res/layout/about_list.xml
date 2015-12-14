@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:cacheColorHint="#00000000"
+              android:orientation="horizontal"
+              android:padding="10dp">
+    <!--android:cacheColorHint="#00000000"设置背景透明-->
+
+
+    <TextView
+        android:id="@+id/list_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:textColor="#000000"
+
+        android:textSize="10pt"/>
+
+    <TextView
+
+        android:id="@+id/list_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:textColor="#000000"
+        android:textSize="10pt"/>
+
+</LinearLayout>

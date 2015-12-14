@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">最美小妾</string>
-    <string name="title_activity_main">超级小妾</string>
+    <string name="title_activity_main">小妾</string>
+    <string name="title_activity_about">关于</string>
+
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="dummy_content">绝世盗草人\nwww.iamding.cn</string>
 </resources>
