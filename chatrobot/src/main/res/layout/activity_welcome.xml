@@ -1,19 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="#FF64B4F2"
-             tools:context="cn.iamding.chatrobot.activities.WelcomeActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FF64B4F2"
+                android:orientation="vertical"
+                tools:context="cn.iamding.chatrobot.activities.WelcomeActivity">
+
 
     <TextView
-        android:id="@+id/welcome_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#066386"
-        android:textSize="50sp"
+        android:textColor="#fff"
+        android:id="@+id/app_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/app_name"
+        android:textSize="28sp"
         />
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/app_name_text"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/robot_icon"
+        />
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_name_text"
+        android:layout_centerHorizontal="true"
+        android:text="@string/welcome_text"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        />
+
+
+</RelativeLayout>

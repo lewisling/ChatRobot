@@ -6,6 +6,7 @@
         <item name="colorPrimary">#4aa1e2</item>
         <item name="colorPrimaryDark">#64b4f2</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:displayOptions">showHome|showTitle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

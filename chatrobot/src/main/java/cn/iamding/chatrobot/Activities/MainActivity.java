@@ -43,6 +43,7 @@ import cn.iamding.chatrobot.model.OneMessage;
 import cn.iamding.chatrobot.ui.MyProgressDialog;
 
 public class MainActivity extends AppCompatActivity {
+    private android.app.ActionBar actionBar;
     private MyProgressDialog myProgressDialog;
     private List<OneMessage> messageList;
     private ListView chatList;
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        actionBar=getActionBar();
+
         setContentView(R.layout.activity_main);
 
         initView();
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         String firstWord;
         SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
         if (mySharedPreferences.getBoolean("isFirstRun", true)) {
-            firstWord = "我是世界上最美的小妾，臭美就一次";
+            firstWord = "我是千年内最美的女孩子，我美不美呀";
             SharedPreferences.Editor myEditor = mySharedPreferences.edit();
             myEditor.putBoolean("isFirstRun", false);
             myEditor.apply();
@@ -212,8 +215,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view voiceButton
      */
     public void sendVoice(View view) {
-        voiceRecognizeManager.startRecognize(Constant.BaiDu);//开始识别用户录音
-        myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
+            voiceRecognizeManager.startRecognize(Constant.BaiDu);//开始识别用户录音
+            myProgressDialog = new MyProgressDialog(MainActivity.this, "录音中...");
     }
 
 

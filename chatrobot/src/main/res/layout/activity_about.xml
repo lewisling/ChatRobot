@@ -6,14 +6,21 @@
               android:orientation="vertical"
     >
 
-
     <ListView
-        android:id="@id/android:list"
+        android:id="@+id/about_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:gravity="start"
+        android:id="@+id/about_copyright"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:drawSelectorOnTop="false"
-        android:scrollbars="vertical"/>
-
-
+        android:layout_margin="10dp"
+        android:text="@string/about_copyright"
+        android:textSize="20sp"
+        />
 </LinearLayout>
