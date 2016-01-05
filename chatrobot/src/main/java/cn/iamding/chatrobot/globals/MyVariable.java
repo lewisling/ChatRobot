@@ -10,5 +10,4 @@ public class MyVariable {
     public static final String NAME="绝世盗草人";
     public static final String BLOG="http://www.iamding.cn";
     public static final String SINA_WEIBO="http://m.weibo.cn/u/3180900562?jumpfrom=weibocom";
-
 }

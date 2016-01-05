@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         String firstWord;
         SharedPreferences mySharedPreferences = getSharedPreferences("fileName", MODE_PRIVATE);
         if (mySharedPreferences.getBoolean("isFirstRun", true)) {
-            firstWord = "我是千年内最美的女孩子，我美不美呀";
+            firstWord = "主人，我美不美呀";
             SharedPreferences.Editor myEditor = mySharedPreferences.edit();
             myEditor.putBoolean("isFirstRun", false);
             myEditor.apply();

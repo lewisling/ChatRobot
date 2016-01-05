@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">千年第一美女</string>
-    <string name="title_activity_main" translatable="false">小美女</string>
+    <string name="app_name" translatable="false">美美聊天机器人</string>
+    <string name="title_activity_main" translatable="false">美美</string>
     <string name="title_activity_about" translatable="false">关于</string>
     <string name="title_activity_welcome" translatable="false">美女聊天机器人</string>
     <string name="welcome_text" translatable="false">www.iamding.cn</string>
