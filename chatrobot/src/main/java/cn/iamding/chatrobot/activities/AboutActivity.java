@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.umeng.update.UmengUpdateAgent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,14 +20,13 @@ import cn.iamding.chatrobot.globals.MyVariable;
 public class AboutActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<HashMap<String, String>> about_list;
-    private HashMap<String, String> map1, map2, map3, map4, map5, map6;
+    private HashMap<String, String> map1, map2, map3, map4, map5, map6, map7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         init();
-        checkUpdate();
     }
 
     /**
@@ -33,6 +34,7 @@ public class AboutActivity extends AppCompatActivity {
      */
     private void checkUpdate() {
         // TODO: 15-12-14 检查更新
+        UmengUpdateAgent.update(this);
     }
 
     /**
@@ -47,6 +49,7 @@ public class AboutActivity extends AppCompatActivity {
         map4 = new HashMap<>();
         map5 = new HashMap<>();
         map6 = new HashMap<>();
+        map7 = new HashMap<>();
         map1.put("title", "作者：");
         map1.put("value", MyVariable.NAME);
         map2.put("title", "日期：");
@@ -57,14 +60,17 @@ public class AboutActivity extends AppCompatActivity {
         map4.put("value", MyVariable.MAIL);
         map5.put("title", "微博：");
         map5.put("value", "点此访问");
-        map6.put("title", "博客 ：");
+        map6.put("title", "博客：");
         map6.put("value", "点此访问");
+        map7.put("title", "更新：");
+        map7.put("value", "点此检查");
         about_list.add(map1);
         about_list.add(map2);
         about_list.add(map3);
         about_list.add(map4);
         about_list.add(map5);
         about_list.add(map6);
+        about_list.add(map7);
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, about_list, R.layout.about_list, new String[]{
                 "title", "value"
         }, new int[]{R.id.list_title, R.id.list_value});
@@ -77,6 +83,9 @@ public class AboutActivity extends AppCompatActivity {
                 }
                 if (position == 5) {
                     toWeb(MyVariable.BLOG);
+                }
+                if (position == 6) {
+                    checkUpdate();
                 }
             }
         });

@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">千年第一美女</string>
-    <string name="title_activity_main">小美女</string>
-    <string name="title_activity_about">关于</string>
-    <string name="title_activity_welcome">美女聊天机器人</string>
-    <string name="welcome_text">www.iamding.cn</string>
-    <string name="about_copyright">本程序由绝世盗草人开发，仅供娱乐，任何人不得将其用于商业用途。语音识别和TTS接口来源于百度和讯飞，机器人API来源于图灵API，图片来源于搜索引擎。如有侵权，请联系我。谢谢。</string>
+    <string name="app_name" translatable="false">千年第一美女</string>
+    <string name="title_activity_main" translatable="false">小美女</string>
+    <string name="title_activity_about" translatable="false">关于</string>
+    <string name="title_activity_welcome" translatable="false">美女聊天机器人</string>
+    <string name="welcome_text" translatable="false">www.iamding.cn</string>
+    <string name="about_copyright" translatable="false">本程序由绝世盗草人开发，仅供娱乐，任何人不得将其用于商业用途。语音识别和TTS接口来源于百度和讯飞，机器人API来源于图灵API，图片来源于搜索引擎。如有侵权，请联系我。谢谢。</string>
 </resources>
